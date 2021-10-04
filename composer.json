@@ -1,5 +1,5 @@
 {
-    "name": "laravel/laravel",
+    "name": "devops-future/amazon-selling-partner-api",
     "type": "project",
     "description": "The Laravel Framework.",
     "keywords": [
@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.2.5",
+        "bagisto/bagisto-package-generator": "dev-master",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^6.3",
