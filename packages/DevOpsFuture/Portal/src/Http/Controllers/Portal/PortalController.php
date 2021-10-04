@@ -1,12 +1,12 @@
 <?php
 
-namespace DevOpsFuture\TestPackage\Http\Controllers\Portal;
+namespace DevOpsFuture\Portal\Http\Controllers\Portal;
 
 use Illuminate\Routing\Controller;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
-class TestPackageController extends Controller
+class PortalController extends Controller
 {
     use DispatchesJobs, ValidatesRequests;
 
@@ -34,7 +34,6 @@ class TestPackageController extends Controller
      */
     public function index()
     {
-        print_r('test');
         return view($this->_config['view']);
     }
 }

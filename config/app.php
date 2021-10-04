@@ -175,6 +175,14 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        //Repository
+        Prettus\Repository\Providers\RepositoryServiceProvider::class,
+
+        // DevOpsFuture packages
+        DevOpsFuture\Theme\Providers\ThemeServiceProvider::class,
+        DevOpsFuture\Portal\Providers\PortalServiceProvider::class,
+        DevOpsFuture\TestPackage\Providers\TestPackageServiceProvider::class,
+
     ],
 
     /*

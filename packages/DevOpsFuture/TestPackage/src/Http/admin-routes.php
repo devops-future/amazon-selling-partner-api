@@ -2,7 +2,7 @@
 
 Route::group([
         'prefix'        => 'admin/testpackage',
-        'middleware'    => ['web', 'admin']
+        'middleware'    => ['web']
     ], function () {
 
         Route::get('', 'DevOpsFuture\TestPackage\Http\Controllers\Admin\TestPackageController@index')->defaults('_config', [
