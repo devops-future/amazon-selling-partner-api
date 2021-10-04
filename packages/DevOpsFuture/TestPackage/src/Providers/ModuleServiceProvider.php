@@ -1,6 +1,6 @@
 <?php
 
-namespace DevOpsFutre\TestAmazon\Providers;
+namespace DevOpsFuture\TestPackage\Providers;
 
 use Konekt\Concord\BaseModuleServiceProvider;
 

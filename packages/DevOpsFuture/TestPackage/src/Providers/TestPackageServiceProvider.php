@@ -1,11 +1,11 @@
 <?php
 
-namespace DevOpsFutre\TestAmazon\Providers;
+namespace DevOpsFuture\TestPackage\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Event;
 
-class TestAmazonServiceProvider extends ServiceProvider
+class TestPackageServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap services.
@@ -18,18 +18,18 @@ class TestAmazonServiceProvider extends ServiceProvider
 
         $this->loadRoutesFrom(__DIR__ . '/../Http/admin-routes.php');
 
-        $this->loadRoutesFrom(__DIR__ . '/../Http/shop-routes.php');
+        $this->loadRoutesFrom(__DIR__ . '/../Http/portal-routes.php');
 
-        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'testamazon');
+        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'testpackage');
 
         $this->publishes([
             __DIR__ . '/../../publishable/assets' => public_path('themes/default/assets'),
         ], 'public');
 
-        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'testamazon');
+        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'testpackage');
 
         Event::listen('bagisto.admin.layout.head', function($viewRenderEventManager) {
-            $viewRenderEventManager->addTemplate('testamazon::admin.layouts.style');
+            $viewRenderEventManager->addTemplate('testpackage::admin.layouts.style');
         });
     }
 

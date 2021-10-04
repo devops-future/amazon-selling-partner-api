@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3f503f7e07d7e7e7c1901b7b2b33c19e",
+    "content-hash": "f8db8a6c0affe7a5816ee994992756d8",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -262,6 +262,52 @@
                 }
             ],
             "time": "2021-08-15T20:50:18+00:00"
+        },
+        {
+            "name": "devops-future/laravel-sub-package-generator",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/devops-future/laravel-sub-package-generator.git",
+                "reference": "960a235ba1844366b97af869d06eff7ec2a8ea38"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/devops-future/laravel-sub-package-generator/zipball/960a235ba1844366b97af869d06eff7ec2a8ea38",
+                "reference": "960a235ba1844366b97af869d06eff7ec2a8ea38",
+                "shasum": ""
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "DevOpsFuture\\PackageGenerator\\Providers\\PackageGeneratorServiceProvider"
+                    ],
+                    "aliases": []
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "DevOpsFuture\\PackageGenerator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "HuJie Song",
+                    "email": "gice101582@gmail.com"
+                }
+            ],
+            "description": "Bagisto Package Generator",
+            "support": {
+                "issues": "https://github.com/devops-future/laravel-sub-package-generator/issues",
+                "source": "https://github.com/devops-future/laravel-sub-package-generator/tree/master"
+            },
+            "time": "2021-10-04T07:00:14+00:00"
         },
         {
             "name": "doctrine/inflector",
@@ -7768,7 +7814,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "devops-future/laravel-sub-package-generator": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

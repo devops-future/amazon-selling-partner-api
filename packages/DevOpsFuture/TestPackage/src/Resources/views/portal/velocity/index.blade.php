@@ -1,13 +1,13 @@
-@extends('shop::layouts.master')
+@extends('portal::layouts.master')
 
 @section('page_title')
-    Package TestAmazon
+    Package TestPackage
 @stop
 
 @section('content-wrapper')
 
     <div class="main">
-        Package TestAmazon
+        Package TestPackage
     </div>
 
 @stop

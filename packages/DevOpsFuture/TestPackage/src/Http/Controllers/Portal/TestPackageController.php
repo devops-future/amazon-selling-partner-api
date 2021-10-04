@@ -1,12 +1,12 @@
 <?php
 
-namespace DevOpsFutre\TestAmazon\Http\Controllers\Shop;
+namespace DevOpsFuture\TestPackage\Http\Controllers\Portal;
 
 use Illuminate\Routing\Controller;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
-class TestAmazonController extends Controller
+class TestPackageController extends Controller
 {
     use DispatchesJobs, ValidatesRequests;
 
