@@ -78,6 +78,18 @@ class TestPackageController extends Controller
         echo $response->get();
     }
 
+    public function test_create_feed() {
+        $apiInstance = new SPA\Api\FeedsApi($this->_sp_config);
+        $body = new SPA\Model\Feeds\CreateFeedSpecification(); // \SellingPartnerApi\Model\Feeds\CreateFeedSpecification
+
+        try {
+            $result = $apiInstance->createFeed($body);
+            print_r($result);
+        } catch (Exception $e) {
+            echo 'Exception when calling FeedsApi->createFeed: ', $e->getMessage(), PHP_EOL;
+        }
+    }
+
     public function test_list_catalog_items() {
         $apiInstance = new SPA\Api\OldCatalogApi($this->_sp_config);
         $marketplace_id = 'A2NODRKZP88ZB9'; // string | A marketplace identifier. Specifies the marketplace for which items are returned.
@@ -99,7 +111,7 @@ class TestPackageController extends Controller
 
     public function test_get_definition_product_type() {
         $apiInstance = new SPA\Api\ProductTypeDefinitionsApi($this->_sp_config);
-        $product_type = 'LUGGAGE'; // string | The Amazon product type name.
+        $product_type = 'WRITING_INSTRUMENT'; // string | The Amazon product type name.
         $marketplace_ids = ['A2NODRKZP88ZB9']; // string[] | A comma-delimited list of Amazon marketplace identifiers for the request.
         $seller_id = 'A2NJERFTFSMOP6'; // string | A selling partner identifier. When provided, seller-specific requirements and values are populated within the product type definition schema, such as brand names associated with the selling partner.
         $product_type_version = 'LATEST'; // string | The version of the Amazon product type to retrieve. Defaults to \"LATEST\",. Prerelease versions of product type definitions may be retrieved with \"RELEASE_CANDIDATE\". If no prerelease version is currently available, the \"LATEST\" live version will be provided.

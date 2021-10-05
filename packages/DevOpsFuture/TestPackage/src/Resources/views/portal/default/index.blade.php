@@ -16,10 +16,13 @@
         Test Amazon Selling Partner API
         <ul>
             <li>
+                <a href="{{ route('portal.testpackage.create-feed') }}">createFeed</a>
+            </li>
+            <li>
                 <a href="{{ route('portal.testpackage.list-catalog-items') }}">listCatalogItems</a>
             </li>
             <li>
-                <a href="{{ route('portal.testpackage.get-definition-product-types') }}">getDefinitionProductTypes</a>
+                <a href="{{ route('portal.testpackage.get-definition-product-type') }}">getDefinitionProductType</a>
             </li>
             <li>
                 <a href="{{ route('portal.testpackage.get-reports') }}">getReports</a>
