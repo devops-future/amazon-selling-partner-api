@@ -25,7 +25,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->command('devops-future:feed:checker')->cron('*/2 * * * *')->withoutOverlapping();
+        $schedule->command('devops-future:feed:checker')->cron('* * * * *')->withoutOverlapping();
     }
 
     /**

@@ -89,15 +89,7 @@ class TestPackageController extends Controller
     }
 
     public function test_create_feed() {
-        $feedType = SPA\FeedType::POST_PRODUCT_DATA;
-
-        // Request feed document id
-        $apiInstance = new SPA\Api\FeedsApi($this->_sp_config);
-        $createFeedDocSpec = new SPA\Model\Feeds\CreateFeedDocumentSpecification(['content_type' => $feedType['contentType']]); // \SellingPartnerApi\Model\Feeds\CreateFeedSpecification
-        $feedDocInfo = $apiInstance->createFeedDocument($createFeedDocSpec);
-        $feedDocId = $feedDocInfo->getFeedDocumentId();
-
-        // Upload feed document
+        /*
         $productParams = [
             "seller_id" => env('AMZ_SELLER_ID'),
             "sku" => "Tonerweb-395823",
@@ -109,14 +101,38 @@ class TestPackageController extends Controller
             "bullet_point_1" => "Free of parabens, phthalates, and sulfates.",
             "bullet_point_2" => "Free of parabens, phthalates, and sulfates.",
         ];
-        $feedContents = $this->productFeedTemplateRepository->generateTemplateBy('OFFICE_PRODUCTS', $productParams);
+        */
+        $productParams = [
+            'sku'   => 'Tonerweb-12345',
+            'product-id'   => '4003630091925',
+            'product-id-type'   => 4,
+            'price'   => 20.0,
+            'item-condition'   => 11,
+            'quantity'   => 1,
+            'add-delete'   => 'a',
+            'country_of_origin'   => 'se',
+            'is_expiration_dated_product'   => 'FALSE',
+        ];
+        //$feedContents = $this->productFeedTemplateRepository->generateXmlBy('OFFICE_PRODUCTS', $productParams);
+        $feedContents = $this->productFeedTemplateRepository->generateCsvBy('OFFICE_PRODUCTS', $productParams);
 
+        //$feedType = SPA\FeedType::POST_PRODUCT_DATA;
+        $feedType = SPA\FeedType::POST_FLAT_FILE_INVLOADER_DATA;
+
+        // Request feed document id
+        $apiInstance = new SPA\Api\FeedsApi($this->_sp_config);
+        $createFeedDocSpec = new SPA\Model\Feeds\CreateFeedDocumentSpecification(['content_type' => $feedType['contentType']]); // \SellingPartnerApi\Model\Feeds\CreateFeedSpecification
+        $feedDocInfo = $apiInstance->createFeedDocument($createFeedDocSpec);
+        $feedDocId = $feedDocInfo->getFeedDocumentId();
+
+        // Upload feed document
         $docToUpload = new SPA\Document($feedDocInfo, $feedType);
         $docToUpload->upload($feedContents);
 
         // Create feed with doc id
         $createFeedSpec = new SPA\Model\Feeds\CreateFeedSpecification();
-        $createFeedSpec->setFeedType('POST_PRODUCT_DATA');
+        //$createFeedSpec->setFeedType('POST_PRODUCT_DATA');
+        $createFeedSpec->setFeedType('POST_FLAT_FILE_INVLOADER_DATA');
         $createFeedSpec->setMarketplaceIds([env('AMZ_TARGET_MARKETPLACE_ID')]);
         $createFeedSpec->setInputFeedDocumentId($feedDocId);
         $createFeedSpec->setFeedOptions([]);
@@ -124,7 +140,7 @@ class TestPackageController extends Controller
         try {
             $result = $apiInstance->createFeed($createFeedSpec);
             $this->productFeedStatusRepository->addProductFeedRecord($result->getFeedId(), $feedDocId,
-                'OFFICE_PRODUCTS', $productParams['sku'], 'EAN', '4902505346217', 'POST_PRODUCT_DATA' );
+                'OFFICE_PRODUCTS', $productParams['sku'], 'EAN', '4003630091925', 'POST_FLAT_FILE_INVLOADER_DATA' );
         } catch (Exception $e) {
             echo 'Exception when calling FeedsApi->createFeed: ', $e->getMessage(), PHP_EOL;
         }

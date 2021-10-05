@@ -17,6 +17,7 @@ class CreateProductFeedTemplateTable extends Migration
             $table->increments('id');
             $table->string('product_type');
             $table->mediumText('field_list');
+            $table->enum('template_type', ['csv', 'xml']);
             $table->text('template');
         });
     }

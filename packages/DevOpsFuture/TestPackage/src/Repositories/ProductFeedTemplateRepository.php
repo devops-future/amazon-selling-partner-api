@@ -16,8 +16,11 @@ class ProductFeedTemplateRepository extends Repository
         return 'DevOpsFuture\TestPackage\Contracts\ProductFeedTemplate';
     }
 
-    public function generateTemplateBy($product_type, $param=[]) {
-        $record_obj = $this->findOneByField('product_type', $product_type);
+    public function generateXmlBy($product_type, $param=[]) {
+        $record_obj = $this->findOneWhere([
+            'template_type' => 'xml',
+            'product_type'  => $product_type,
+        ]);
         if($record_obj) {
             $search_list = explode(',', $record_obj->field_list);
             $replace_list = [];
@@ -29,6 +32,27 @@ class ProductFeedTemplateRepository extends Repository
                 $replace_list[] = $param[$search];
             }
             return str_replace($search_list, $replace_list, $record_obj->template);
+
+        } else {
+            return false;
+        }
+    }
+
+    public function generateCsvBy($product_type, $param=[]) {
+        $record_obj = $this->findOneWhere([
+            'template_type' => 'csv',
+            'product_type'  => $product_type,
+        ]);
+        if($record_obj) {
+            $key_list = explode(',', $record_obj->field_list);
+            $value_list = [];
+            foreach($key_list as $key) {
+                if(!isset($param[$key])) {
+                    return false;
+                }
+                $value_list[] = $param[$key];
+            }
+            return implode("\t", $key_list)."\r\n".implode("\t", $value_list);
 
         } else {
             return false;

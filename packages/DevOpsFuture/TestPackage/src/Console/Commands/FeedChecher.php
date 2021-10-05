@@ -66,7 +66,6 @@ class FeedChecher extends Command
             foreach($in_progress_list as $feed_status_record) {
                 $result = $apiInstance->getFeed($feed_status_record->feed_id);
                 $this->productFeedStatusRepository->updateRecordByFeed($result);
-                print_r($result);
             }
         } catch (Exception $e) {
             echo 'Exception when calling FeedsApi->getFeed: ', $e->getMessage(), PHP_EOL;
