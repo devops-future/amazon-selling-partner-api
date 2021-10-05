@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductFeedXmlTable extends Migration
+class CreateProductFeedTemplateTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateProductFeedXmlTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_feed_xmls', function (Blueprint $table) {
+        Schema::create('product_feed_templates', function (Blueprint $table) {
             $table->increments('id');
             $table->string('product_type');
             $table->mediumText('field_list');
@@ -28,6 +28,6 @@ class CreateProductFeedXmlTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_feed_xml');
+        Schema::dropIfExists('product_feed_template');
     }
 }

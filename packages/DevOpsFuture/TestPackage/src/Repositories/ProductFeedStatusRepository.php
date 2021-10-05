@@ -32,6 +32,10 @@ class ProductFeedStatusRepository extends Repository
         return $this->create($newRecord);
     }
 
+    public function getCompletedFeedList() {
+        return $this->findByField('is_completed', true);
+    }
+
     public function getUncompletedFeedList() {
         return $this->findByField('is_completed', false);
     }

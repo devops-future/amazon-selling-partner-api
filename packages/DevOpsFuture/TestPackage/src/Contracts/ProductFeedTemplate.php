@@ -2,6 +2,6 @@
 
 namespace DevOpsFuture\TestPackage\Contracts;
 
-interface ProductFeedXml
+interface ProductFeedTemplate
 {
 }

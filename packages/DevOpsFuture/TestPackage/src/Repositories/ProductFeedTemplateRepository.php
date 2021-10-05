@@ -4,7 +4,7 @@ namespace DevOpsFuture\TestPackage\Repositories;
 
 use DevOpsFuture\Core\Eloquent\Repository;
 
-class ProductFeedXmlRepository extends Repository
+class ProductFeedTemplateRepository extends Repository
 {
     /**
      * Specify Model class name
@@ -13,10 +13,10 @@ class ProductFeedXmlRepository extends Repository
      */
     function model()
     {
-        return 'DevOpsFuture\TestPackage\Contracts\ProductFeedXml';
+        return 'DevOpsFuture\TestPackage\Contracts\ProductFeedTemplate';
     }
 
-    public function generateXmlBy($product_type, $param=[]) {
+    public function generateTemplateBy($product_type, $param=[]) {
         $record_obj = $this->findOneByField('product_type', $product_type);
         if($record_obj) {
             $search_list = explode(',', $record_obj->field_list);

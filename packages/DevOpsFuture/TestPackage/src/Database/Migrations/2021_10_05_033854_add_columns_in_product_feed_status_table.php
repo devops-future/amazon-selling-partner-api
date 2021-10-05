@@ -14,9 +14,9 @@ class AddColumnsInProductFeedStatusTable extends Migration
     public function up()
     {
         Schema::table('product_feed_statuses', function (Blueprint $table) {
-            $table->mediumText('result_document_id')->after('id');
-            $table->mediumText('document_id')->after('id');
-            $table->mediumText('feed_id')->after('id');
+            $table->mediumText('result_document_id')->after('id')->nullable();
+            $table->mediumText('document_id')->after('id')->nullable();
+            $table->mediumText('feed_id')->after('id')->nullable();
         });
     }
 

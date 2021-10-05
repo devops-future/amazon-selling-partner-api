@@ -3,7 +3,7 @@
 namespace DevOpsFuture\TestPackage\Http\Controllers\Portal;
 
 use DevOpsFuture\TestPackage\Repositories\ProductFeedStatusRepository;
-use DevOpsFuture\TestPackage\Repositories\ProductFeedXmlRepository;
+use DevOpsFuture\TestPackage\Repositories\ProductFeedTemplateRepository;
 use Illuminate\Routing\Controller;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -20,7 +20,7 @@ class TestPackageController extends Controller
     use DispatchesJobs, ValidatesRequests;
 
     protected $productFeedStatusRepository;
-    protected $productFeedXmlRepository;
+    protected $productFeedTemplateRepository;
 
     /**
      * Contains route related configuration
@@ -37,12 +37,12 @@ class TestPackageController extends Controller
      */
     public function __construct(
         ProductFeedStatusRepository $productFeedStatusRepository,
-        ProductFeedXmlRepository $productFeedXmlRepository
+        ProductFeedTemplateRepository $productFeedTemplateRepository
     ) {
         $this->_config = request('_config');
 
         $this->productFeedStatusRepository = $productFeedStatusRepository;
-        $this->productFeedXmlRepository = $productFeedXmlRepository;
+        $this->productFeedTemplateRepository = $productFeedTemplateRepository;
 
         $this->_sp_config = new SPA\Configuration(
             [
@@ -109,7 +109,7 @@ class TestPackageController extends Controller
             "bullet_point_1" => "Free of parabens, phthalates, and sulfates.",
             "bullet_point_2" => "Free of parabens, phthalates, and sulfates.",
         ];
-        $feedContents = $this->productFeedXmlRepository->generateXmlBy('OFFICE_PRODUCTS', $productParams);
+        $feedContents = $this->productFeedTemplateRepository->generateTemplateBy('OFFICE_PRODUCTS', $productParams);
 
         $docToUpload = new SPA\Document($feedDocInfo, $feedType);
         $docToUpload->upload($feedContents);

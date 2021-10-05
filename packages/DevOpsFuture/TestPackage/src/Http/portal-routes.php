@@ -26,3 +26,18 @@ Route::group([
     Route::get('/put-listings-item', 'DevOpsFuture\TestPackage\Http\Controllers\Portal\TestPackageController@test_put_litings_item')->name('portal.testpackage.put-litings-item');
 
 });
+
+Route::group([
+    'prefix'     => 'table',
+    'middleware' => ['web']
+], function () {
+
+    Route::get('/', 'DevOpsFuture\TestPackage\Http\Controllers\Portal\TableController@index')->defaults('_config', [
+        'view' => 'testpackage::portal.default.table.index',
+    ])->name('portal.testpackage.table.index');
+
+    Route::get('/feed-result/{id}', 'DevOpsFuture\TestPackage\Http\Controllers\Portal\TableController@feed_result')->defaults('_config', [
+        'view' => 'testpackage::portal.default.table.feed',
+    ])->name('portal.testpackage.table.feed');
+
+});
