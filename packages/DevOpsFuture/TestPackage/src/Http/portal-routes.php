@@ -17,6 +17,8 @@ Route::group([
 
     Route::get('/get-definition-product-type', 'DevOpsFuture\TestPackage\Http\Controllers\Portal\TestPackageController@test_get_definition_product_type')->name('portal.testpackage.get-definition-product-type');
 
+    Route::get('/search-definitions-product-types', 'DevOpsFuture\TestPackage\Http\Controllers\Portal\TestPackageController@test_search_definitions_product_types')->name('portal.testpackage.search-definitions-product-types');
+
     Route::get('/get-reports', 'DevOpsFuture\TestPackage\Http\Controllers\Portal\TestPackageController@get_reports')->name('portal.testpackage.get-reports');
 
     Route::get('/get-report-document', 'DevOpsFuture\TestPackage\Http\Controllers\Portal\TestPackageController@test_get_report_document')->name('portal.testpackage.get-report-document');

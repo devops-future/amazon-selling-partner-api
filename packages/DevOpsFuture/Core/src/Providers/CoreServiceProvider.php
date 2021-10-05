@@ -1,11 +1,11 @@
 <?php
 
-namespace DevOpsFuture\TestPackage\Providers;
+namespace DevOpsFuture\Core\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Event;
 
-class TestPackageServiceProvider extends ServiceProvider
+class CoreServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap services.
@@ -14,24 +14,22 @@ class TestPackageServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app->register(ModuleServiceProvider::class);
-
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
         $this->loadRoutesFrom(__DIR__ . '/../Http/admin-routes.php');
 
         $this->loadRoutesFrom(__DIR__ . '/../Http/portal-routes.php');
 
-        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'testpackage');
+        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'core');
 
         $this->publishes([
             __DIR__ . '/../../publishable/assets' => public_path('themes/default/assets'),
         ], 'public');
 
-        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'testpackage');
+        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'core');
 
         Event::listen('bagisto.admin.layout.head', function($viewRenderEventManager) {
-            $viewRenderEventManager->addTemplate('testpackage::admin.layouts.style');
+            $viewRenderEventManager->addTemplate('core::admin.layouts.style');
         });
     }
 

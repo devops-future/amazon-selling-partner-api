@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePruductFeedStatusTable extends Migration
+class CreateProductFeedStatusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreatePruductFeedStatusTable extends Migration
      */
     public function up()
     {
-        Schema::create('pruduct_feed_status', function (Blueprint $table) {
+        Schema::create('product_feed_statuses', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('product_type');
             $table->string('product_identifier');
@@ -33,6 +33,6 @@ class CreatePruductFeedStatusTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pruduct_feed_status');
+        Schema::dropIfExists('product_feed_status');
     }
 }

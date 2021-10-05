@@ -25,6 +25,9 @@
                 <a href="{{ route('portal.testpackage.get-definition-product-type') }}">getDefinitionProductType</a>
             </li>
             <li>
+                <a href="{{ route('portal.testpackage.search-definitions-product-types') }}">searchDefinitionProductType</a>
+            </li>
+            <li>
                 <a href="{{ route('portal.testpackage.get-reports') }}">getReports</a>
             </li>
             <li>

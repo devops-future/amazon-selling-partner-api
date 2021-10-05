@@ -2,6 +2,8 @@
 
 namespace DevOpsFuture\TestPackage\Http\Controllers\Portal;
 
+use DevOpsFuture\TestPackage\Repositories\ProductFeedStatusRepository;
+use DevOpsFuture\TestPackage\Repositories\ProductFeedXmlRepository;
 use Illuminate\Routing\Controller;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -17,6 +19,9 @@ class TestPackageController extends Controller
 {
     use DispatchesJobs, ValidatesRequests;
 
+    protected $productFeedStatusRepository;
+    protected $productFeedXmlRepository;
+
     /**
      * Contains route related configuration
      *
@@ -30,9 +35,14 @@ class TestPackageController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(
+        ProductFeedStatusRepository $productFeedStatusRepository,
+        ProductFeedXmlRepository $productFeedXmlRepository
+    ) {
         $this->_config = request('_config');
+
+        $this->productFeedStatusRepository = $productFeedStatusRepository;
+        $this->productFeedXmlRepository = $productFeedXmlRepository;
 
         $this->_sp_config = new SPA\Configuration(
             [
@@ -79,8 +89,17 @@ class TestPackageController extends Controller
     }
 
     public function test_create_feed() {
+        $feedType = SPA\FeedType::POST_PRODUCT_DATA;
+
         $apiInstance = new SPA\Api\FeedsApi($this->_sp_config);
-        $body = new SPA\Model\Feeds\CreateFeedSpecification(); // \SellingPartnerApi\Model\Feeds\CreateFeedSpecification
+        $createFeedDocSpec = new SPA\Model\Feeds\CreateFeedDocumentSpecification(['content_type' => $feedType['contentType']]); // \SellingPartnerApi\Model\Feeds\CreateFeedSpecification
+        $feedDocInfo = $apiInstance->createFeedDocument($createFeedDocSpec);
+        $feedDocId = $feedDocInfo->getFeedDocumentId();
+
+        $feedContents = $this->productFeedXmlRepository->generateXmlBy('OFFICE_PRODUCTS');
+        exit;
+
+
 
         try {
             $result = $apiInstance->createFeed($body);
@@ -124,6 +143,19 @@ class TestPackageController extends Controller
             print_r($result);
         } catch (Exception $e) {
             echo 'Exception when calling ProductTypeDefinitionsApi->getDefinitionsProductType: ', $e->getMessage(), PHP_EOL;
+        }
+    }
+
+    public function test_search_definitions_product_types() {
+        $apiInstance = new SPA\Api\ProductTypeDefinitionsApi($this->_sp_config);
+        $marketplace_ids = ['A2NODRKZP88ZB9']; // string[] | A comma-delimited list of Amazon marketplace identifiers for the request.
+        $keywords = ['PILOT'/*, 'OFFICE_PRODUCTS', 'WRITING_INSTRUMENT'*/]; // string[] | A comma-delimited list of keywords to search product types by.
+
+        try {
+            $result = $apiInstance->searchDefinitionsProductTypes($marketplace_ids, $keywords);
+            print_r($result);
+        } catch (Exception $e) {
+            echo 'Exception when calling ProductTypeDefinitionsApi->searchDefinitionsProductTypes: ', $e->getMessage(), PHP_EOL;
         }
     }
 

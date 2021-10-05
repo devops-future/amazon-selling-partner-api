@@ -9,7 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.2.5",
-        "devops-future/laravel-sub-package-generator": "dev-master",
+        "devops-future/laravel-sub-package-generator": "^1.0.0",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "7.0",
@@ -17,7 +17,9 @@
         "jlevers/selling-partner-api": "^4.0",
         "laravel/framework": "^7.24",
         "laravel/tinker": "^2.0",
-        "prettus/l5-repository": "^2.7"
+        "prettus/l5-repository": "^2.7",
+        "staudenmeir/laravel-upsert": "^1.0",
+        "konekt/concord": "^1.2"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
@@ -39,6 +41,7 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
+            "DevOpsFuture\\Core\\": "packages/DevOpsFuture/Core/src",
             "DevOpsFuture\\Theme\\": "packages/DevOpsFuture/Theme/src",
             "DevOpsFuture\\Portal\\": "packages/DevOpsFuture/Portal/src",
             "DevOpsFuture\\TestPackage\\": "packages/DevOpsFuture/TestPackage/src"
