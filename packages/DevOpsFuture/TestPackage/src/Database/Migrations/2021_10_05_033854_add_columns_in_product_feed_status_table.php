@@ -14,7 +14,9 @@ class AddColumnsInProductFeedStatusTable extends Migration
     public function up()
     {
         Schema::table('product_feed_statuses', function (Blueprint $table) {
+            $table->mediumText('result_document_id')->after('id');
             $table->mediumText('document_id')->after('id');
+            $table->mediumText('feed_id')->after('id');
         });
     }
 
@@ -25,8 +27,10 @@ class AddColumnsInProductFeedStatusTable extends Migration
      */
     public function down()
     {
-        Schema::table('product_feed_status', function (Blueprint $table) {
+        Schema::table('product_feed_statuses', function (Blueprint $table) {
+            $table->dropColumn('result_document_id');
             $table->dropColumn('document_id');
+            $table->dropColumn('feed_id');
         });
     }
 }

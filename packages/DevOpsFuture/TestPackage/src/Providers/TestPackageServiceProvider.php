@@ -2,6 +2,7 @@
 
 namespace DevOpsFuture\TestPackage\Providers;
 
+use DevOpsFuture\TestPackage\Console\Commands\FeedChecher;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Event;
 
@@ -43,6 +44,8 @@ class TestPackageServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerConfig();
+
+        $this->registerCommands();
     }
 
     /**
@@ -59,5 +62,17 @@ class TestPackageServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             dirname(__DIR__) . '/Config/acl.php', 'acl'
         );
+    }
+
+    /**
+     * Register the console commands of this package
+     */
+    protected function registerCommands()
+    {
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                FeedChecher::class,
+            ]);
+        }
     }
 }

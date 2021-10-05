@@ -91,19 +91,40 @@ class TestPackageController extends Controller
     public function test_create_feed() {
         $feedType = SPA\FeedType::POST_PRODUCT_DATA;
 
+        // Request feed document id
         $apiInstance = new SPA\Api\FeedsApi($this->_sp_config);
         $createFeedDocSpec = new SPA\Model\Feeds\CreateFeedDocumentSpecification(['content_type' => $feedType['contentType']]); // \SellingPartnerApi\Model\Feeds\CreateFeedSpecification
         $feedDocInfo = $apiInstance->createFeedDocument($createFeedDocSpec);
         $feedDocId = $feedDocInfo->getFeedDocumentId();
 
-        $feedContents = $this->productFeedXmlRepository->generateXmlBy('OFFICE_PRODUCTS');
-        exit;
+        // Upload feed document
+        $productParams = [
+            "seller_id" => env('AMZ_SELLER_ID'),
+            "sku" => "Tonerweb-395823",
+            "external_item_type" => "EAN",
+            "external_item_id" => "4902505346217",
+            "title" => "Weightless Lip Color",
+            "brand" => "Pilot Pen",
+            "description" => "A richly hydrating all-natural lipstick in shades that complement every skin tone.",
+            "bullet_point_1" => "Free of parabens, phthalates, and sulfates.",
+            "bullet_point_2" => "Free of parabens, phthalates, and sulfates.",
+        ];
+        $feedContents = $this->productFeedXmlRepository->generateXmlBy('OFFICE_PRODUCTS', $productParams);
 
+        $docToUpload = new SPA\Document($feedDocInfo, $feedType);
+        $docToUpload->upload($feedContents);
 
+        // Create feed with doc id
+        $createFeedSpec = new SPA\Model\Feeds\CreateFeedSpecification();
+        $createFeedSpec->setFeedType('POST_PRODUCT_DATA');
+        $createFeedSpec->setMarketplaceIds([env('AMZ_TARGET_MARKETPLACE_ID')]);
+        $createFeedSpec->setInputFeedDocumentId($feedDocId);
+        $createFeedSpec->setFeedOptions([]);
 
         try {
-            $result = $apiInstance->createFeed($body);
-            print_r($result);
+            $result = $apiInstance->createFeed($createFeedSpec);
+            $this->productFeedStatusRepository->addProductFeedRecord($result->getFeedId(), $feedDocId,
+                'OFFICE_PRODUCTS', $productParams['sku'], 'EAN', '4902505346217', 'POST_PRODUCT_DATA' );
         } catch (Exception $e) {
             echo 'Exception when calling FeedsApi->createFeed: ', $e->getMessage(), PHP_EOL;
         }
